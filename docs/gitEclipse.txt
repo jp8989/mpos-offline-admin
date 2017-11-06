@@ -1,0 +1,7 @@
+https://eclipsesource.com/blogs/tutorials/egit-tutorial/
+
+egit is already included in STS.
+
+https://eclipsesource.com/blogs/tutorials/egit-tutorial/
+
+my git repository : github jp8989/Revolution15!
