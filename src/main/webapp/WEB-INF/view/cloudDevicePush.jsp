@@ -50,22 +50,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 </div>
 
 <!-- Sidebar -->
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
-    <i class="fa fa-remove"></i>
-  </a>
-  <h4 class="w3-bar-item"><b>Menu</b></h4>
-  
-	<c:url value="/cssButton" var="messageUrl" />
-  <a color: blue; class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">Cloud Device Push</a>
-  
-	<c:url value="/cssButton" var="messageUrl" />  
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Offline Device Reports</a>
-  
-  	<c:url value="/cssButton" var="messageUrl" />
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Offline Download Schedule</a>
 
-</nav>
+<!-- beg:define form for cloudDevicePush -->
+	<jsp:include page="leftnavbar.jsp"/>	
+<!-- end:define form for cloudDevicePush -->	
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>

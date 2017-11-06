@@ -40,14 +40,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
   
-	<c:url value="/cssButton" var="messageUrl" />
+	<c:url value="/cloudDevicePush" var="messageUrl" />
   <a class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">Cloud Device Push</a>
   
-	<c:url value="/cssButton" var="messageUrl" />  
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Offline Device Reports</a>
+	<c:url value="/offlineDeviceReports" var="messageUrl" />  
+  <a style="color:teal" class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">Offline Device Reports</a>
   
-  	<c:url value="/cssButton" var="messageUrl" />
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Offline Download Schedule</a>
+  	<c:url value="/offlineDownloadSchedule" var="messageUrl" />
+  <a class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">Offline Download Schedule</a>
 
 </nav>
 
