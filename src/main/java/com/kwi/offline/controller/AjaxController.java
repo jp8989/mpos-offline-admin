@@ -2,14 +2,18 @@ package com.kwi.offline.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.kwi.offline.model.ErrorMessage;
+import com.kwi.offline.model.GBDevice;
+import com.kwi.offline.model.GBDevicesDB;
 import com.kwi.offline.model.ValidationResponse;
 import com.kwi.offline.model.User;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,12 +27,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AjaxController {
 	
-    private Logger logger = Logger.getLogger(AjaxController.class);
+    private Logger logger = Logger.getAnonymousLogger();
 	
 	@RequestMapping(value="/cloudDevicePush",method=RequestMethod.GET)
 	public String showFormAjax(Model model){
 		logger.info("/cloudDevicePush");
 		model.addAttribute("user", new User());
+		
+		//GBDevicesDB gbddb = new ArrayList();
+	    ArrayList<GBDevice> gbdevices = GBDevicesDB.selectGBDevices();
+		model.addAttribute("gbdevices", gbdevices);	    
+	     
 		return "/cloudDevicePush";
 	}
 	

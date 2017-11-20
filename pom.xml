@@ -61,6 +61,20 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+    		<groupId>kwi_common</groupId>
+    		<artifactId>com.kwi.dao</artifactId>
+    		<version>1.0</version>
+    		<scope>system</scope>
+    		<systemPath>C:\Users\jpachman\workspace\kwi_common\deploy\server\jar\kwi_server.jar</systemPath>
+    	</dependency>	
+		<dependency>
+    		<groupId>kwi_common</groupId>
+    		<artifactId>com.kwi.common</artifactId>
+    		<version>1.0</version>
+    		<scope>system</scope>
+    		<systemPath>C:\Users\jpachman\workspace\kwi_common\deploy\server\jar\common-persist-0.2.6.jar</systemPath>
+    	</dependency>	   	
 		<!-- Web layer -->
 		<dependency>
 			<groupId>org.springframework</groupId>

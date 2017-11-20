@@ -19,6 +19,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 }
 </style>
 
+  <script>
+  $( function() {
+    $( ".widget input[type=submit], .widget a, .widget button" ).button();
+    $( "button, input, a" ).click( function( event ) {
+      event.preventDefault();
+    } );
+  } );
+  </script>
 <script>
   $( function() {
     $( "#speed" ).selectmenu();
@@ -85,6 +93,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
       				<option>IPH-4321</option>
     			</select>
 			</fieldset>
+			
+			<a href="https://gbx86dev.kligerweiss.net/offline/restservice/offlinecontroller/healthcheck/IPH-0105BB7413A8/aaaaaaaaaa">HealthCheck</a>
+			
+			<h1>Pushkit</h1>
+			<button class="ui-button ui-widget ui-corner-all">A button element</button>
+ 
+			<input class="ui-button ui-widget ui-corner-all" type="submit" value="A submit button">
+ 
+			<a class="ui-button ui-widget ui-corner-all" href="#">An anchor</a>
+			
 		</form>
 	</div>
 	<!-- end:define form for cloudDevicePush -->	
