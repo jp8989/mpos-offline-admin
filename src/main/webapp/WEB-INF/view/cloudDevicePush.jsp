@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
@@ -74,89 +75,54 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 
 	<!-- beg:define form for cloudDevicePush -->
 	<div class="demo">
-		<form action="#">
+	
+    <form:form method="POST" commandName="gbDevice">
+    
+		<form:select path="deviceId" items="${gbdevices}"/>  
+    
+		<!-- 	
+		<c:if test="${coloursList}">
+    		<!-- Display this only when myObject has the atttribute "myAttribute" -->
+    		<!-- Now I can access safely to "myAttribute" -->
+
+		</c:if>	
   			<fieldset>
     			<label for="client">Select a Client</label>
-    			<select name="device" id="device">
+    			<select name="client" id="client">
     				<option>aero</option>
       				<option>brighton</option>
       				<option selected="selected">pandora</option>
     			</select>
-			</fieldset>		
-  			<fieldset>
-    			<label for="device">Select a Device</label>
-    			<select name="device" id="device">
-    				<option>IPH-1234</option>
-      				<option>IPH-5678</option>
-      				<option selected="selected">IPH-9012</option>
-      				<option>IPH-8765</option>
-      				<option>IPH-4321</option>
-    			</select>
-			</fieldset>
+			</fieldset>	
+		-->
 			
-			<a href="https://gbx86dev.kligerweiss.net/offline/restservice/offlinecontroller/healthcheck/IPH-0105BB7413A8/aaaaaaaaaa">HealthCheck</a>
+			<h1>Healthcheck</h1>
+<a href="http://kwidev31:8080/mpos-offline-pushkit-0.0.1-SNAPSHOT/restservice/offlinecontroller/healthcheck/IPH-754F9B3E10EA/">HealthCheck</a>
 			
 			<h1>Pushkit</h1>
+
+<a href="http://kwidev31:8080/mpos-offline-pushkit-0.0.1-SNAPSHOT/restservice/offlinecontroller/startpushtest">Pushkit</a>
+
+			<!-- 
 			<button class="ui-button ui-widget ui-corner-all">A button element</button>
  
 			<input class="ui-button ui-widget ui-corner-all" type="submit" value="A submit button">
  
 			<a class="ui-button ui-widget ui-corner-all" href="#">An anchor</a>
+			-->
 			
-		</form>
+    </form:form>
 	</div>
 	<!-- end:define form for cloudDevicePush -->	
 
     </div>
     <div class="w3-third w3-container">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
     </div>
   </div>
 
-  <div class="w3-row">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Heading</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="w3-third w3-container">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
-    </div>
-  </div>
-
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Heading</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div class="w3-third w3-container">
-      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
-    </div>
-  </div>
-
-  <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a class="w3-button w3-black" href="#">1</a>
-      <a class="w3-button w3-hover-black" href="#">2</a>
-      <a class="w3-button w3-hover-black" href="#">3</a>
-      <a class="w3-button w3-hover-black" href="#">4</a>
-      <a class="w3-button w3-hover-black" href="#">5</a>
-      <a class="w3-button w3-hover-black" href="#">»</a>
-    </div>
-  </div>
-
+ 
   <footer id="myFooter">
-    <div class="w3-container w3-theme-l2 w3-padding-32">
       <h4>Footer</h4>
-    </div>
-
-    <div class="w3-container w3-theme-l1">
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
     </div>
   </footer>
 

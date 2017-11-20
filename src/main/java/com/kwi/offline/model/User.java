@@ -1,11 +1,11 @@
 package com.kwi.offline.model;
 
-import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+//import org.hibernate.validator.constraints.NotEmpty;
 
 public class User {
-	
+/*	
 	@NotEmpty
 	private String firstName;
 	
@@ -38,7 +38,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+*/	
 	
 	
 }

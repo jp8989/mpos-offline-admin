@@ -1,7 +1,7 @@
 
 
 
-
+https://dzone.com/articles/grid-spa-integrating-jqgrid-with-spring-mvc-gson
 
 https://www.mkyong.com/spring-mvc/spring-mvc-how-to-include-js-or-css-files-in-a-jsp-page/
 
@@ -18,3 +18,36 @@ http://www.codejava.net/frameworks/spring/how-to-use-log4j-in-spring-mvc
 http://www.free-css.com/free-css-templates
 
 https://github.com/michaelisvy
+
+
+http://www.baeldung.com/spring-mvc-and-the-modelattribute-annotation
+
+2.2 @ModelAttribute As a Method Argument
+
+When used as a method argument, 
+it indicates the argument should be retrieved from the model. 
+When not present, it should be first instantiated and then added to the model and once present in the model, 
+the arguments fields should be populated from all request parameters that have matching names.
+
+In the code snippet that follows the employee model attribute is populated with data from a form submitted to the addEmployee endpoint. 
+Spring MVC does this behind the scenes before invoking the submit method:
+
+
+@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
+public String submit(@ModelAttribute("employee") Employee employee) {
+    // Code that uses the employee object
+ 
+    return "employeeView";
+    
+    
+ original mvc-config.xml xsi 
+ 
+ 	<!-- 
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd">
+	-->					 
+}
