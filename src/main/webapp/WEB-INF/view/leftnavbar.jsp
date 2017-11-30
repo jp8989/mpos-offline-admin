@@ -22,6 +22,9 @@
   
   	<c:url value="/offlineDownloadSchedule" var="messageUrl" />
   <a class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">Offline Download Schedule</a>
+  
+   <c:url value="/testjqgrid" var="messageUrl" />
+  <a class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">test JQ Grid</a>
 
 </nav>
 

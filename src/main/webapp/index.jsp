@@ -64,6 +64,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   
   	<c:url value="/offlineDownloadSchedule" var="messageUrl" />
   <a class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">Offline Download Schedule</a>
+  
+  	<c:url value="/testjqgrid" var="messageUrl" />
+  <a style="color:teal" class="w3-bar-item w3-button w3-hover-black" href="${messageUrl}">test JQ Grid</a>
 
 </nav>
 

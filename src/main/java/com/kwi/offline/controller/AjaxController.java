@@ -4,69 +4,73 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 //import javax.validation.Valid;
 
+import com.google.gson.Gson;
 import com.kwi.offline.model.ErrorMessage;
 import com.kwi.offline.model.GBDevice;
 import com.kwi.offline.model.GBDevicesDB;
+import com.kwi.offline.model.JQGridDTO;
+import com.kwi.offline.model.Pushkit;
 import com.kwi.offline.model.ValidationResponse;
 import com.kwi.offline.model.User;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 
 @Controller
 @ControllerAdvice
 public class AjaxController {
 	
-    private Logger logger = Logger.getAnonymousLogger();
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String initForm(Model model) {
-		System.out.println("/cloudDevicePush0");		
-        GBDevice gbDevice = new GBDevice();
-        model.addAttribute("gbDevice", gbDevice);
-        model.addAttribute("gbDeviceList",GBDevicesDB.selectGBDevices());
-        model.addAttribute("testvar", "testvar");
-        return "/cloudDevicePush";
-    }
+	private static final Logger logger = Logger.getLogger(AjaxController.class);
     
 	
 	@RequestMapping(value="/cloudDevicePush",method=RequestMethod.GET)
 	@ModelAttribute("gbDeviceList")
-	public String showFormAjax(Model model){
-		logger.info("/cloudDevicePush");
+	public String showFormAjax(Model model,HttpServletRequest request,HttpServletResponse response) {
+		logger.info("/cloudDevicePush1");
 		System.out.println("/cloudDevicePush1");		
 		
+		//beg:original simple list of strings of deviceid
 		List<String> gbdevicelist = GBDevicesDB.selectGBDevices();
-		
 		for (int i=0;i<gbdevicelist.size();i++) {
 			System.out.println("gbdeviceFromcalldb:"+gbdevicelist.get(i));
 		}
 		
-		Map<String,GBDevice> gbdeviceinfo = GBDevicesDB.selectGBDeviceInfo();
+		GBDevice gbDevice = new GBDevice();
+		model.addAttribute("gbDevice",gbDevice);			
+		model.addAttribute("gbdevices",gbdevicelist);			
+		//end:original simple list of strings of deviceid		
+		
+		/*
+		JQGridDTO<GBDevice> gridData  = GBDevicesDB.loadGBDevicesInfo();
 
-        GBDevice gbDevice = new GBDevice();
-        model.addAttribute("gbDevice", gbDevice);
-        model.addAttribute("gbdevices",gbdevicelist);	
-        model.addAttribute("gbdevicesinfo",gbdeviceinfo);
-        
-        JQGridDTO<SuperHeroDTO> gridData = new JQGridHandler().loadSuperHeroes(req);
-        req.setAttribute("formData", JsonUtil.toJsonObj(gridData));
-        return forward;        
- 
+        Gson gson = new Gson();
+		model.addAttribute("formData",gson.toJson(gridData));
+        request.setAttribute("formData",gson.toJson(gridData));
+		*/
+		System.out.println("/cloudDevicePush2");		
+	     
+		return "/cloudDevicePush";
+		
+		 
         /*
         model.addAttribute("testvar", "testvar"); 
         List<String> coloursList = new ArrayList<String>();
@@ -84,12 +88,50 @@ public class AjaxController {
         } 
         */               
         
-        
-		System.out.println("/cloudDevicePush2");		
-	     
-		return "/cloudDevicePush";
+        	
 	}
 	
+	@RequestMapping(value="/pushkit",method= { RequestMethod.GET, RequestMethod.POST })
+	public String pushkit (@ModelAttribute("pushkit") Pushkit pushkit,
+							BindingResult result, ModelMap model){
+		logger.info("/pushkit");
+		logger.info("token:"+pushkit.getToken());
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String res = restTemplate.getForObject("http://kwidev31.kligerweiss.net:8080/mpos-offline-pushkit/restservice/offlinecontroller/pushnotify/"+pushkit.getToken(),String.class);
+		//System.out.println(response.getBody());		
+		
+		return "/testjqgridjsp";
+	}				
+	
+	@RequestMapping(value="/testjqgrid",method= { RequestMethod.GET, RequestMethod.POST })
+	public String testJqGrid (Model model,HttpServletRequest request,HttpServletResponse response){
+		Pushkit pushkit = new Pushkit();
+		model.addAttribute("pushkit",pushkit);
+		logger.info("/testjqgrid");
+		System.out.println("/testjqgrid");		
+		return "/testjqgridjsp";
+	}			
+	
+	@RequestMapping(value="/loadjqgrid", produces="application/json" )
+	public @ResponseBody JQGridDTO<GBDevice> gridData (
+			@RequestParam("_search") Boolean search,
+    		@RequestParam(value="filters", required=false) String filters,
+    		@RequestParam(value="page", required=false) Integer page,
+    		@RequestParam(value="rows", required=false) Integer rows,
+    		@RequestParam(value="sidx", required=false) String sidx,
+    		@RequestParam(value="sord", required=false) String sord) {			
+			
+	
+		logger.info("/loadjqgrid");
+		System.out.println("/loadjqgrid");		
+
+		GBDevice gbDevice = new GBDevice();
+		
+		JQGridDTO<GBDevice> response  = GBDevicesDB.loadGBDevicesInfo();
+        Gson gson = new Gson();
+		return response;
+	}		
 	@RequestMapping(value="/offlineDeviceReports",method=RequestMethod.GET)
 	public String showFormAutoComplete (Model model){
 		logger.info("/offlineDeviceReports");

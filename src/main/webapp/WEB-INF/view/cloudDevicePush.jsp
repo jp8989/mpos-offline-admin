@@ -1,14 +1,26 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
-<title>W3.CSS Template</title>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cloud Device Push</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.2/css/ui.jqgrid.min.css"/>
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.2/jquery.jqgrid.min.js"></script>
+
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 .w3-sidebar {
@@ -20,28 +32,59 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 }
 </style>
 
-  <script>
-  $( function() {
-    $( ".widget input[type=submit], .widget a, .widget button" ).button();
-    $( "button, input, a" ).click( function( event ) {
-      event.preventDefault();
-    } );
-  } );
-  </script>
+ 
 <script>
-  $( function() {
-    $( "#speed" ).selectmenu();
- 
-    $( "#files" ).selectmenu();
- 
-    $( "#number" )
-      .selectmenu()
-      .selectmenu( "menuWidget" )
-        .addClass( "overflow" );
- 
-    $( "#salutation" ).selectmenu();
-  } );
-  </script>
+jQuery(document).ready(function() {
+    $("#formData").jqGrid({
+            url : "/mpos-offline-admin/loadjqgrid",
+            datatype : "json",
+            mtype : 'GET',
+            colNames : [ 'DeviceToken', 'DeviceId', 'ClientName' ],
+            colModel : [ {
+                    name : 'deviceId',
+                    index : 'deviceId',
+                    width : 400
+            }, {
+                    name : 'deviceToken',
+                    index : 'deviceToken',
+                    width : 200,
+                    editable : true
+            }, {
+                name : 'client',
+                index : 'client',
+                width : 150,
+                editable : true                    
+            } ],
+            pager : '#pager',
+            rowNum : 10,
+            rowList : [ 10, 20, 30 ],
+            sortname : 'invid',
+            sortorder : 'desc',
+            viewrecords : true,
+            gridview : true,
+            caption : 'Device Tokens',
+            jsonReader : {
+                    repeatitems : false,
+            },
+            editurl : "/mpos-offline-admin/testjqgrid",
+            onSelectRow: function(rowId){ 
+                var rowData = $('#formData').jqGrid('getRowData', rowId);
+                //You can access the desired columns like this --> rowData['col3']
+                document.getElementById("token").value = rowData['deviceId'];
+                //alert('rowData[deviceId]:'+rowData['deviceId']);
+            }
+    });
+    jQuery("#formData").jqGrid('navGrid', '#pager', {
+            edit : true,
+            add : true,
+            del : true,
+            search : true
+    });
+});
+
+</script>  
+  
+</head>
 
 <body>
 
@@ -84,7 +127,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 		<c:if test="${coloursList}">
     		<!-- Display this only when myObject has the atttribute "myAttribute" -->
     		<!-- Now I can access safely to "myAttribute" -->
-
+		-->
+		<!-- 
 		</c:if>	
   			<fieldset>
     			<label for="client">Select a Client</label>
@@ -110,7 +154,18 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
  
 			<a class="ui-button ui-widget ui-corner-all" href="#">An anchor</a>
 			-->
-			
+			<!-- < %=request.getAttribute("formData")%>-->
+	</br>
+	<input class="w3-input" type="text" id='token'>
+	<label>Token:</label>
+	</br>	
+	<table id="formData">
+		<tr>
+			<td />
+		</tr>
+	</table>
+	<div id="pager"></div>				
+
     </form:form>
 	</div>
 	<!-- end:define form for cloudDevicePush -->	
